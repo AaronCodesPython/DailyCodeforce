@@ -4,6 +4,8 @@ import 'package:app/widgets/StandartAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../scraper/hash.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -28,7 +30,7 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 28.sp, color: Colors.white),
             ),
             TextButton(
-                onPressed: () => executeScraper(),
+                onPressed: () => pseudoRandom(123, 500),
                 child: Text("Scrape Data (Test)"))
           ],
         ),

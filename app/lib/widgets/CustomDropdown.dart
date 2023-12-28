@@ -20,15 +20,13 @@ class MyCustomDropdown extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                ranks[startIndex][1],
-                style: TextStyle(color: Colors.white, fontSize: 16.sp),
-              ),
-              const Icon(Icons.arrow_drop_down, color: Colors.white),
-            ],
+          child: Center(
+            child: Text(
+              ranks[startIndex][1],
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: Colors.white, fontSize: 16.sp > 22 ? 22 : 16.sp),
+            ),
           ),
         ),
         onSelected: (String newValue) {
