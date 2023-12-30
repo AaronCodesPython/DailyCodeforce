@@ -37,9 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_screenutil: ^5.7.0
   intl: ^0.18.1
-  js: ^0.6.5
   provider: ^6.1.1
-  cryptography: ^2.5.0
+  shared_preferences: ^2.2.2
+  localstorage: ^4.0.1+4
+  http: ^0.13.6
+  crypto: ^3.0.3
+  
   
 
 dev_dependencies:

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 List<List<dynamic>> ranks = [
   [999, 'Newbie', Colors.grey, Colors.green[800]],
@@ -15,11 +18,47 @@ List<List<dynamic>> ranks = [
 ];
 
 class CurrentRank with ChangeNotifier {
-  int _index = 0;
-  int get index => _index;
+  int _rank = 0;
+  int get rank => _rank;
 
-  void changeIndex(int newIndex) {
-    _index = newIndex;
+  CurrentRank() {
+    _initializeRank();
+  }
+
+  Future<void> _initializeRank() async {
+    if (kIsWeb) {
+      final LocalStorage storage = LocalStorage('data.json');
+      await storage.ready;
+      print("get:${storage.getItem('rank')}");
+      _rank = storage.getItem('rank') ?? 0;
+    } else {
+      final prefs = await SharedPreferences.getInstance();
+      _rank = prefs.getInt('rank') ?? 0;
+    }
+    notifyListeners(); // Notify listeners after updating the rank
+  }
+
+  int getIndexByRanking() {
+    for (int i = 0; i < ranks.length; i++) {
+      if (rank <= ranks[i][0]) {
+        return i;
+      }
+    }
+    // If rank is greater than the last threshold, return the last index
+    return ranks.length - 1;
+  }
+
+  void setRank(int newRank) async {
+    if (kIsWeb) {
+      final LocalStorage storage = LocalStorage('data.json');
+      await storage.ready;
+      storage.setItem('rank', newRank);
+      print("Set");
+    } else {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt('rank', newRank);
+    }
+    _rank = newRank;
     notifyListeners();
   }
 }

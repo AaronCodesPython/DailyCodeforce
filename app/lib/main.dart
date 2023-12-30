@@ -1,4 +1,6 @@
+import 'package:app/providers/ApiKeyProvider.dart';
 import 'package:app/providers/CurrentRankProvider.dart';
+import 'package:app/providers/StreakProvider.dart';
 import 'package:app/screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +8,11 @@ import 'package:provider/provider.dart';
 
 void main(List<String> args) async {
   runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(create: (_) => CurrentRank())],
+    providers: [
+      ChangeNotifierProvider(create: (_) => CurrentRank()),
+      ChangeNotifierProvider(create: (_) => ApiKeyProvider()),
+      ChangeNotifierProvider(create: (_) => StreakProvider())
+    ],
     child: const App(),
   ));
 }

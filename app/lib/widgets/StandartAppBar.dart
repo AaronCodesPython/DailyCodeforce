@@ -23,7 +23,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
     // Adjust leadingWidth based on screen width
     return AppBar(
       toolbarHeight: kToolbarHeight,
-      backgroundColor: UsedColors.backgroundColor,
+      backgroundColor: Color.fromRGBO(11, 16, 24, 1),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),
         child: Container(
@@ -38,7 +38,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       leadingWidth: screenWidth * 0.3 > 300 ? 300 : screenWidth * 0.3,
       actions: [
-        RankingWidget(ranking: 200),
+        RankingWidget(),
         Container(
           margin: const EdgeInsets.all(4),
           decoration: BoxDecoration(
