@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:app/providers/ApiKeyProvider.dart';
+import 'package:app/providers/ProblemProvider.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +22,7 @@ Future<http.Response> callApi(BuildContext context) async {
   for (int i = 0; i < 6; i++) {
     rand += characters[random.nextInt(characters.length - 1)];
   }
-  print(
-      "$rand/problemset.problems?apiKey=a8dd9471aa84876ec39a6bc91ec0c0317c5957f9&time=${DateTime.now().millisecondsSinceEpoch ~/ 1000}#3e54bb7ff326b9eb6854f2d6f3f54688fc3e22d1");
+
   String hexPart = sha512Hex(
       "$rand/problemset.problems?apiKey=a8dd9471aa84876ec39a6bc91ec0c0317c5957f9&time=${DateTime.now().millisecondsSinceEpoch ~/ 1000}#3e54bb7ff326b9eb6854f2d6f3f54688fc3e22d1");
   Uri ur = Uri(
@@ -35,10 +35,17 @@ Future<http.Response> callApi(BuildContext context) async {
         'apiSig': '$rand$hexPart'
       });
   var resp = await http.get(ur);
+  var jsonData = jsonDecode(resp.body);
+  var problems = jsonData['result']['problems'] as List;
   logFile.write(ur.toString());
-  logFile.write(resp.body);
-  print(ur.toString());
-  print(resp.body);
+  //logFile.write(resp.body);
+  print(problems[0]);
+  print(problems.length);
+  logFile.write(problems[0]);
+  logFile.write(problems[120]);
+  context.read<ProblemProvider>().setData(
+      problems[0]['name'], problems[0]['contestId'], problems[0]['rating']);
+
   return resp;
 }
 //https://codeforces.com/apiHelp/methods#problemset.problems

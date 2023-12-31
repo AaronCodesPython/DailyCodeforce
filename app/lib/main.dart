@@ -1,5 +1,6 @@
 import 'package:app/providers/ApiKeyProvider.dart';
 import 'package:app/providers/CurrentRankProvider.dart';
+import 'package:app/providers/ProblemProvider.dart';
 import 'package:app/providers/StreakProvider.dart';
 import 'package:app/screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,8 @@ void main(List<String> args) async {
     providers: [
       ChangeNotifierProvider(create: (_) => CurrentRank()),
       ChangeNotifierProvider(create: (_) => ApiKeyProvider()),
-      ChangeNotifierProvider(create: (_) => StreakProvider())
+      ChangeNotifierProvider(create: (_) => StreakProvider()),
+      ChangeNotifierProvider(create: (_) => ProblemProvider())
     ],
     child: const App(),
   ));

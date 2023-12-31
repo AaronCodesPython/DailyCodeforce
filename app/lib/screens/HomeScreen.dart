@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/ApiKeyProvider.dart';
+import '../widgets/ProblemWidget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,56 +20,36 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: StandardAppBar(),
       backgroundColor: UsedColors.backgroundColor,
-      body: Column(
-        children: [
-          Row(
-            children: [
-              FutureBuilder(
-                future: context.read<StreakProvider>().initializeStreak(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    // Initialize streak to 0 if it's null
-                    if (context.read<StreakProvider>().streak == null) {
-                      context.read<StreakProvider>().setStreak(0);
-                    }
-                    // Display the current streak
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: height * 0.2,
+            ),
+            ProblemWidget(),
+            FutureBuilder(
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData) {
                     return Text(
-                      context.watch<StreakProvider>().streak.toString(),
-                      style: TextStyle(fontSize: 64.sp, color: Colors.white),
-                    );
+                        "Api Key is set to: ${context.watch<ApiKeyProvider>().apiKey}");
                   } else {
-                    return CircularProgressIndicator();
+                    return DialogExample();
                   }
-                },
-              ),
-              Text(
-                'Days',
-                style: TextStyle(fontSize: 28.sp, color: Colors.white),
-              ),
-            ],
-          ),
-          FutureBuilder(
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  return Text(
-                      "Api Key is set to: ${context.watch<ApiKeyProvider>().apiKey}");
                 } else {
-                  return DialogExample();
+                  return CircularProgressIndicator();
                 }
-              } else {
-                return CircularProgressIndicator();
-              }
 
-              //DialogExample();
-            },
-            future: context.read<ApiKeyProvider>().initializeApiKey(),
-          ),
-          TextButton(
-            child: Text("Show todays Problem"),
-            onPressed: () => callApi(context),
-          )
-        ],
+                //DialogExample();
+              },
+              future: context.read<ApiKeyProvider>().initializeApiKey(),
+            ),
+            TextButton(
+              child: Text("Show todays Problem"),
+              onPressed: () => callApi(context),
+            )
+          ],
+        ),
       ),
     );
   }
