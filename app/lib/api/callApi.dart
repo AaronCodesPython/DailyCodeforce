@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:app/providers/ApiKeyProvider.dart';
@@ -10,6 +11,7 @@ import 'package:http/http.dart' as http;
 import '../providers/CurrentRankProvider.dart';
 
 Future<http.Response> callApi(BuildContext context) async {
+  var logFile = File('logFile.log').openWrite(mode: FileMode.append);
   int currentRating = context.read<CurrentRank>().rank;
   String apiKey = context.read<ApiKeyProvider>().apiKey!;
   const characters =
@@ -33,6 +35,8 @@ Future<http.Response> callApi(BuildContext context) async {
         'apiSig': '$rand$hexPart'
       });
   var resp = await http.get(ur);
+  logFile.write(ur.toString());
+  logFile.write(resp.body);
   print(ur.toString());
   print(resp.body);
   return resp;
