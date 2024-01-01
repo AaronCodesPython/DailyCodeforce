@@ -26,11 +26,13 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: height * 0.2,
             ),
-            ProblemWidget(),
-            FutureBuilder(
+            const ProblemWidget(),
+            /*FutureBuilder(
               builder: (context, snapshot) {
+                print(snapshot.data);
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData) {
+                    
                     return Text(
                         "Api Key is set to: ${context.watch<ApiKeyProvider>().apiKey}");
                   } else {
@@ -43,7 +45,10 @@ class HomeScreen extends StatelessWidget {
                 //DialogExample();
               },
               future: context.read<ApiKeyProvider>().initializeApiKey(),
-            ),
+            ),*/
+             Text(
+                        "Api Key is set to: ${context.watch<ApiKeyProvider>().apiKey ?? "None"}"),
+            TextButton(onPressed:() =>  DialogExample().showMyDialog(context), child: Text("EnterApi Key")),
             TextButton(
               child: Text("Show todays Problem"),
               onPressed: () => callApi(context),

@@ -5,46 +5,44 @@ import 'package:provider/provider.dart';
 class DialogExample extends StatelessWidget {
   const DialogExample({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    // Create a text editing controller
+  void showMyDialog(BuildContext context) {
     final TextEditingController textController = TextEditingController();
 
-    // Schedule the dialog to show after the current build cycle
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Enter a string:'),
-              TextField(
-                controller: textController, // Use the text controller here
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                // Print the text from the controller
-                print('Entered text: ${textController.text}');
-                context.read<ApiKeyProvider>().setApiKey(textController.text);
-                Navigator.pop(context, 'OK');
-              },
-              child: const Text('OK'),
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('AlertDialog Title'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Enter a string:'),
+            TextField(
+              controller: textController,
             ),
           ],
         ),
-      );
-    });
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              print('Entered text: ${textController.text}');
+              context.read<ApiKeyProvider>().setApiKey(textController.text);
+              // Perform your action with the text here
+              Navigator.pop(context, 'OK');
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 
-    // Return an empty Container as the widget does not need to display anything itself
+  @override
+  Widget build(BuildContext context) {
+    // This widget now does not need to display anything itself
     return Container();
   }
 }
