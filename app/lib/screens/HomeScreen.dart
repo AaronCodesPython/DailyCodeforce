@@ -46,11 +46,21 @@ class HomeScreen extends StatelessWidget {
               },
               future: context.read<ApiKeyProvider>().initializeApiKey(),
             ),*/
-             Text(
-                        "Api Key is set to: ${context.watch<ApiKeyProvider>().apiKey ?? "None"}"),
-            TextButton(onPressed:() =>  DialogExample().showMyDialog(context), child: Text("EnterApi Key")),
+            context.read<ApiKeyProvider>().apiKey == null
+                ? ApiDialog()
+                : SizedBox(
+                    height: 0,
+                    width: 0,
+                  ),
             TextButton(
-              child: Text("Show todays Problem"),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(UsedColors.containerColor),
+                  foregroundColor: MaterialStateProperty.all(Colors.white)),
+              child: Text(
+                "Load todays Problem",
+                style: TextStyle(fontSize: 32.sp),
+              ),
               onPressed: () => callApi(context),
             )
           ],

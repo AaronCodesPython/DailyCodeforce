@@ -7,6 +7,10 @@ class ApiKeyProvider with ChangeNotifier {
   String? _apiKey;
   String? get apiKey => _apiKey;
 
+  ApiKeyProvider() {
+    _initializeApiKey();
+  }
+
   Future<String?> _initializeApiKey() async {
     if (kIsWeb) {
       final LocalStorage storage = LocalStorage('data.json');
@@ -15,7 +19,8 @@ class ApiKeyProvider with ChangeNotifier {
       _apiKey = storage.getItem('apiKey');
     } else {
       final prefs = await SharedPreferences.getInstance();
-      _apiKey = prefs.getString('apiKey');
+      _apiKey = prefs.getString('api');
+      //prefs.clear();
     }
     notifyListeners();
     return _apiKey;
@@ -30,8 +35,10 @@ class ApiKeyProvider with ChangeNotifier {
       print("Set");
     } else {
       print("newApikey:$newApikey");
+
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('apiKey', newApikey);
+
+      await prefs.setString('api', newApikey.toString());
       print("Set");
     }
     notifyListeners();
