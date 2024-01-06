@@ -1,15 +1,20 @@
 import 'package:app/providers/ProblemProvider.dart';
+import 'package:app/providers/StreakProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProblemWidget extends StatelessWidget {
   const ProblemWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    bool show = context.watch<ProblemProvider>().contestId != null;
+    String url =
+        'https://codeforces.com/problemset/problem/${context.watch<ProblemProvider>().contestId}/${context.watch<ProblemProvider>().index}';
     return Column(
       children: [
         context.watch<ProblemProvider>().title != null
@@ -23,17 +28,58 @@ class ProblemWidget extends StatelessWidget {
               ),
         context.watch<ProblemProvider>().rating != null
             ? Text(
-                context.watch<ProblemProvider>().rating.toString(),
+                'Rating:${context.watch<ProblemProvider>().rating.toString()}',
                 style: TextStyle(color: Colors.white, fontSize: 32.sp),
               )
             : const SizedBox(
                 height: 0,
                 width: 0,
               ),
-        context.watch<ProblemProvider>().contestId != null
+        show
             ? Text(
-                context.watch<ProblemProvider>().contestId.toString(),
-                style: const TextStyle(color: Colors.white),
+                'Contest-Id:${context.watch<ProblemProvider>().contestId.toString()}',
+                style: TextStyle(color: Colors.white, fontSize: 32.sp),
+              )
+            : const SizedBox(
+                height: 0,
+                width: 0,
+              ),
+        Center(
+          child: show
+              ? InkWell(
+                  child: Text(
+                    url,
+                    style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 26.sp),
+                  ),
+                  onTap: () => launchUrl(Uri.parse(url)),
+                )
+              : const SizedBox(height: 0, width: 0),
+        ),
+        SizedBox(height: 40),
+        show
+            ? ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(49, 130, 20, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width / 10,
+                      vertical: 20.sp),
+                ),
+                onPressed: () {
+                  context
+                      .read<StreakProvider>()
+                      .setStreak(context.read<StreakProvider>().streak! + 1);
+                  Navigator.pushReplacementNamed(context, '/congratulation');
+                },
+                child: Text(
+                  'Mark as Done',
+                  style: TextStyle(fontSize: 22.sp),
+                ),
               )
             : const SizedBox(
                 height: 0,

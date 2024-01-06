@@ -11,10 +11,10 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../providers/CurrentRankProvider.dart';
+import 'PseudoRandomNumber.dart';
 
 Future<http.Response?> callApi(BuildContext context) async {
-  var logFile = File('logFile.log').openWrite(mode: FileMode.append);
-  int currentRating = context.read<CurrentRank>().rank;
+  int rating = context.read<CurrentRank>().rank;
   String? apiKey = context.read<ApiKeyProvider>().apiKey;
   if (apiKey == null) {
     const ApiDialog().showMyDialog(context);
@@ -42,14 +42,16 @@ Future<http.Response?> callApi(BuildContext context) async {
     var resp = await http.get(ur);
     var jsonData = jsonDecode(resp.body);
     var problems = jsonData['result']['problems'] as List;
-    logFile.write(ur.toString());
-    //logFile.write(resp.body);
-    print(problems[0]);
-    print(problems.length);
-    logFile.write(problems[0]);
-    logFile.write(problems[120]);
+    int maxRating = getRankingRange(rating);
+    var filteredProblems = problems.where((p) {
+      return p['rating'] != null && p['rating'] <= maxRating;
+    }).toList();
+    int index = getNumber(filteredProblems.length);
     context.read<ProblemProvider>().setData(
-        problems[0]['name'], problems[0]['contestId'], problems[0]['rating']);
+        filteredProblems[index]['name'],
+        filteredProblems[index]['index'],
+        filteredProblems[index]['contestId'],
+        filteredProblems[index]['rating']);
 
     return resp;
   }

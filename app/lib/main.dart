@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import 'api/PseudoRandomNumber.dart';
+import 'screens/CongratulationScreen.dart';
+
 void main(List<String> args) async {
   runApp(MultiProvider(
     providers: [
@@ -30,11 +33,14 @@ class App extends StatelessWidget {
       builder: (_, child) {
         return MaterialApp(
           title: 'Flutter Demo',
-          initialRoute: '/',
-          routes: {'/': (context) => const HomeScreen()},
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          initialRoute:
+              context.watch<StreakProvider>().lastIncrease == daysSinceUnix
+                  ? '/'
+                  : '/congratulation',
+          routes: {
+            '/': (context) => const HomeScreen(),
+            '/congratulation': (context) => const CongratulationScreen()
+          },
         );
       },
     );

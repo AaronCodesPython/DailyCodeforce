@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../data/Ranks.dart';
 import '../providers/CurrentRankProvider.dart';
 
 class RankingWidget extends StatelessWidget {
@@ -21,7 +22,7 @@ class RankingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    int startIndex = context.watch<CurrentRank>().getIndexByRanking();
+    int startIndex = getIndexByRanking(context.watch<CurrentRank>().rank);
 
     return FutureBuilder(
       builder: (context, snapshot) {

@@ -1,6 +1,8 @@
+import 'package:app/api/PseudoRandomNumber.dart';
 import 'package:app/api/callApi.dart';
 import 'package:app/data/Colors.dart' as UsedColors;
 import 'package:app/providers/CurrentRankProvider.dart';
+import 'package:app/providers/ProblemProvider.dart';
 import 'package:app/providers/StreakProvider.dart';
 import 'package:app/widgets/AlertDialog_API.dart';
 import 'package:app/widgets/StandartAppBar.dart';
@@ -17,6 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: StandardAppBar(),
       backgroundColor: UsedColors.backgroundColor,
@@ -27,7 +30,43 @@ class HomeScreen extends StatelessWidget {
               height: height * 0.2,
             ),
             const ProblemWidget(),
-            /*FutureBuilder(
+            context.read<ApiKeyProvider>().apiKey == null
+                ? const ApiDialog()
+                : const SizedBox(
+                    height: 0,
+                    width: 0,
+                  ),
+            context.watch<ProblemProvider>().title == null
+                ? TextButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            UsedColors.containerColor),
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.white)),
+                    child: Text(
+                      "Load todays Problem",
+                      style: TextStyle(fontSize: 32.sp),
+                    ),
+                    onPressed: () {
+                      callApi(context);
+                    },
+                  )
+                : SizedBox(height: 0, width: 0)
+          ],
+        ),
+      ),
+    );
+  }
+}
+/*FloatingActionButton(
+              onPressed: () {
+                int currentStreak = context.read<StreakProvider>().streak ?? 0;
+                context.read<StreakProvider>().setStreak(currentStreak + 1);
+              },
+              backgroundColor: Colors.red,
+            )
+
+/*FutureBuilder(
               builder: (context, snapshot) {
                 print(snapshot.data);
                 if (snapshot.connectionState == ConnectionState.done) {
@@ -45,34 +84,4 @@ class HomeScreen extends StatelessWidget {
                 //DialogExample();
               },
               future: context.read<ApiKeyProvider>().initializeApiKey(),
-            ),*/
-            context.read<ApiKeyProvider>().apiKey == null
-                ? ApiDialog()
-                : SizedBox(
-                    height: 0,
-                    width: 0,
-                  ),
-            TextButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(UsedColors.containerColor),
-                  foregroundColor: MaterialStateProperty.all(Colors.white)),
-              child: Text(
-                "Load todays Problem",
-                style: TextStyle(fontSize: 32.sp),
-              ),
-              onPressed: () => callApi(context),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-/*FloatingActionButton(
-              onPressed: () {
-                int currentStreak = context.read<StreakProvider>().streak ?? 0;
-                context.read<StreakProvider>().setStreak(currentStreak + 1);
-              },
-              backgroundColor: Colors.red,
-            )*/
+            ),*/*/
