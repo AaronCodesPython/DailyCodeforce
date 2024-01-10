@@ -12,7 +12,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Size preferredSize;
 
   StandardAppBar({Key? key})
-      : preferredSize = Size.fromHeight(kToolbarHeight),
+      : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return AppBar(
       toolbarHeight: kToolbarHeight,
-      backgroundColor: Color.fromRGBO(11, 16, 24, 1),
+      backgroundColor: const Color.fromRGBO(11, 16, 24, 1),
       leading: Container(
         margin: const EdgeInsets.all(8),
         color: UsedColors.containerColor,
@@ -33,7 +33,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (context.read<StreakProvider>().streak == null) {
-                context.read<StreakProvider>().setStreak(0);
+                context.read<StreakProvider>().setStreakStd(0);
               }
               return Row(
                 mainAxisSize: MainAxisSize.min,
@@ -49,7 +49,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               );
             } else {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
           },
         ),
@@ -57,15 +57,35 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         RankingWidget(),
         Container(
-          margin: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-              color: UsedColors.containerColor, shape: BoxShape.circle),
-          child: TextButton(
-              onPressed: () {},
-              child: Text("AG",
-                  style: TextStyle(
-                      color: Colors.white, fontSize: 20.sp > 25 ? 25 : 20.sp))),
-        ),
+            margin: const EdgeInsets.all(4),
+            decoration: const BoxDecoration(
+                color: UsedColors.containerColor, shape: BoxShape.circle),
+            child: PopupMenuButton(
+              color: UsedColors.containerColor,
+              icon: const Icon(
+                Icons.settings,
+                color: UsedColors.iconColor,
+              ),
+              onSelected: (String res) {},
+              itemBuilder: (context) {
+                return <PopupMenuEntry<String>>[
+                  PopupMenuItem<String>(
+                    value: 'reload',
+                    child: Row(
+                      children: const [
+                        Icon(Icons.repeat),
+                        Text('Reload App'),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuItem<String>(
+                    value: 'time',
+                    child: Text('Time Format Setting'),
+                  ),
+                  // Add more items here
+                ];
+              },
+            )),
       ],
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),

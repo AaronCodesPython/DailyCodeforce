@@ -1,16 +1,16 @@
 import 'package:app/api/PseudoRandomNumber.dart';
 import 'package:app/api/callApi.dart';
 import 'package:app/data/Colors.dart' as UsedColors;
-import 'package:app/providers/CurrentRankProvider.dart';
 import 'package:app/providers/ProblemProvider.dart';
-import 'package:app/providers/StreakProvider.dart';
 import 'package:app/widgets/AlertDialog_API.dart';
 import 'package:app/widgets/StandartAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/ApiKeyProvider.dart';
+import '../providers/StreakProvider.dart';
 import '../widgets/ProblemWidget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,6 +26,23 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
+            TextButton(
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  //print(daysSinceUnix);
+                  print(context.read<StreakProvider>().lastIncrease);
+                  var g = <String, String>{
+                    for (String key in prefs.getKeys()) ...{
+                      key: prefs.get(key).toString()
+                    }
+                  };
+                  print(g.toString());
+                  print(
+                      "unix: ${DateTime.now().millisecondsSinceEpoch / 86400000}");
+                  //print("unix-days: ${daysSinceUnix}");
+                  print("unix-Milli:${DateTime.now().millisecondsSinceEpoch}");
+                },
+                child: Text("dqwfafaf")),
             SizedBox(
               height: height * 0.2,
             ),

@@ -23,7 +23,8 @@ class _CountdownTimerState extends State<CountdownTimer> {
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {
         DateTime now = DateTime.now();
-        DateTime nextDayMidnight = DateTime(now.year, now.month, now.day + 1);
+        DateTime nextDayMidnight =
+            DateTime(now.year, now.month, now.day + 1, 1);
         _duration = nextDayMidnight.difference(now);
       });
     });
@@ -44,7 +45,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
   Widget build(BuildContext context) {
     return Text(
       _formattedDuration(_duration),
-      style: TextStyle(fontSize: 20.sp > 28 ? 28 : 20.sp),
+      style: TextStyle(fontSize: 20.sp > 28 ? 28 : 20.sp, color: Colors.white),
     );
   }
 }

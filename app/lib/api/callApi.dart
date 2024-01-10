@@ -16,6 +16,7 @@ import 'PseudoRandomNumber.dart';
 Future<http.Response?> callApi(BuildContext context) async {
   int rating = context.read<CurrentRank>().rank;
   String? apiKey = context.read<ApiKeyProvider>().apiKey;
+  //String? secretKey = context.read<ApiKeyProvider>().ascasfaf;
   if (apiKey == null) {
     const ApiDialog().showMyDialog(context);
     return null;
@@ -29,13 +30,13 @@ Future<http.Response?> callApi(BuildContext context) async {
     }
 
     String hexPart = sha512Hex(
-        "$rand/problemset.problems?apiKey=a8dd9471aa84876ec39a6bc91ec0c0317c5957f9&time=${DateTime.now().millisecondsSinceEpoch ~/ 1000}#3e54bb7ff326b9eb6854f2d6f3f54688fc3e22d1");
+        "$rand/problemset.problems?apiKey=$apiKey&time=${DateTime.now().millisecondsSinceEpoch ~/ 1000}#3e54bb7ff326b9eb6854f2d6f3f54688fc3e22d1");
     Uri ur = Uri(
         scheme: 'https',
         host: 'codeforces.com',
         path: 'api/problemset.problems',
         queryParameters: {
-          'apiKey': 'a8dd9471aa84876ec39a6bc91ec0c0317c5957f9',
+          'apiKey': apiKey,
           'time': '${DateTime.now().millisecondsSinceEpoch ~/ 1000}',
           'apiSig': '$rand$hexPart'
         });

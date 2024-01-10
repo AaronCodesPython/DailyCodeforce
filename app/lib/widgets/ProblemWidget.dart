@@ -59,32 +59,27 @@ class ProblemWidget extends StatelessWidget {
               : const SizedBox(height: 0, width: 0),
         ),
         SizedBox(height: 40),
-        show
-            ? ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(49, 130, 20, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width / 10,
-                      vertical: 20.sp),
-                ),
-                onPressed: () {
-                  context
-                      .read<StreakProvider>()
-                      .setStreak(context.read<StreakProvider>().streak! + 1);
-                  Navigator.pushReplacementNamed(context, '/congratulation');
-                },
-                child: Text(
-                  'Mark as Done',
-                  style: TextStyle(fontSize: 22.sp),
-                ),
-              )
-            : const SizedBox(
-                height: 0,
-                width: 0,
-              ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromRGBO(49, 130, 20, 1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width / 10,
+                vertical: 20.sp),
+          ),
+          onPressed: () {
+            context
+                .read<StreakProvider>()
+                .setStreak(context.read<StreakProvider>().streak! + 1);
+            Navigator.pushReplacementNamed(context, '/congratulation');
+          },
+          child: Text(
+            'Mark as Done',
+            style: TextStyle(fontSize: 22.sp),
+          ),
+        )
       ],
     );
   }
