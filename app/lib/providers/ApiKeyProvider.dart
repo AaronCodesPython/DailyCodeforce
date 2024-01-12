@@ -1,46 +1,28 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:localstorage/localstorage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiKeyProvider with ChangeNotifier {
   String? _apiKey;
   String? get apiKey => _apiKey;
-
+  String? _secret;
+  String? get secret => _secret;
   ApiKeyProvider() {
     _initializeApiKey();
   }
 
-  Future<String?> _initializeApiKey() async {
-    if (kIsWeb) {
-      final LocalStorage storage = LocalStorage('data.json');
-      await storage.ready;
-      print("get2:${storage.getItem('apiKey')}");
-      _apiKey = storage.getItem('apiKey');
-    } else {
-      final prefs = await SharedPreferences.getInstance();
-      _apiKey = prefs.getString('api');
-      //prefs.clear();
-    }
+  Future<void> _initializeApiKey() async {
+    final prefs = await SharedPreferences.getInstance();
+    _apiKey = prefs.getString('api');
+    _secret = prefs.getString('secret');
     notifyListeners();
-    return _apiKey;
   }
 
-  void setApiKey(String newApikey) async {
+  void setApiKey(String newApikey, String newSecret) async {
     _apiKey = newApikey;
-    if (kIsWeb) {
-      final LocalStorage storage = LocalStorage('data.json');
-      await storage.ready;
-      storage.setItem('apiKey', newApikey);
-      print("Set");
-    } else {
-      print("newApikey:$newApikey");
-
-      final prefs = await SharedPreferences.getInstance();
-
-      await prefs.setString('api', newApikey.toString());
-      print("Set");
-    }
+    _secret = newSecret;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('api', newApikey);
+    await prefs.setString('secret', newSecret);
     notifyListeners();
   }
 }

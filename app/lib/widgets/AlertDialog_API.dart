@@ -60,8 +60,9 @@ class ApiDialog extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              print('Entered text: ${textController1.text}');
-              context.read<ApiKeyProvider>().setApiKey(textController1.text);
+              context
+                  .read<ApiKeyProvider>()
+                  .setApiKey(textController1.text, textController2.text);
               // Perform your action with the text here
               callApi(HigherContext);
               Navigator.pop(context, 'OK');

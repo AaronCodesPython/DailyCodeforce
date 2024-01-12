@@ -1,12 +1,9 @@
 import 'package:app/providers/StreakProvider.dart';
 import 'package:app/widgets/CountdownTimer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../api/PseudoRandomNumber.dart';
 import '../data/Colors.dart' as UsedColors;
 
 class CongratulationScreen extends StatelessWidget {
@@ -48,7 +45,7 @@ class CongratulationScreen extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
               }),
           Text(
@@ -64,19 +61,9 @@ class CongratulationScreen extends StatelessWidget {
           TextButton(
               onPressed: () async {
                 final prefs = await SharedPreferences.getInstance();
-                var g = <String, String>{
-                  for (String key in prefs.getKeys()) ...{
-                    key: prefs.get(key).toString()
-                  }
-                };
-                print(g.toString());
-                print(
-                    "unix: ${DateTime.now().millisecondsSinceEpoch / 86400000}");
-                print("unix-days: ${daysSinceUnix}");
-                print("unix-Milli:${DateTime.now().millisecondsSinceEpoch}");
-                //prefs.clear();
+                prefs.clear();
               },
-              child: Text("dqwfafaf"))
+              child: const Text("dqwfafaf"))
         ]),
       ),
     );

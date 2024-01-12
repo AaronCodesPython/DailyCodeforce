@@ -6,7 +6,7 @@ import '../data/Ranks.dart';
 import '../providers/CurrentRankProvider.dart';
 
 class RankingWidget extends StatelessWidget {
-  RankingWidget({super.key});
+  const RankingWidget({super.key});
   List<Color> getColorsByRank(int rank) {
     if (rank <= 1200) {
       return [Colors.green, Colors.deepOrange];
@@ -47,12 +47,6 @@ class RankingWidget extends StatelessWidget {
               ),
             ),
             onSelected: (String newValue) {
-              print("Selected:" + newValue);
-              //session['rank'] = "3000";
-              /*setState(() {
-            dropdownValue = newValue;
-          });*/
-              // TODO
               context.read<CurrentRank>().setRank(int.parse(newValue));
             },
             itemBuilder: (BuildContext context) {

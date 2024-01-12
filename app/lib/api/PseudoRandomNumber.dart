@@ -1,8 +1,4 @@
 import 'dart:math';
-import 'package:app/providers/CurrentRankProvider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../data/Ranks.dart';
 
 int daysSinceUnix = (DateTime.now().millisecondsSinceEpoch / 86400000).floor();

@@ -4,7 +4,6 @@ import 'package:app/providers/ProblemProvider.dart';
 import 'package:app/providers/StreakProvider.dart';
 import 'package:app/screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -34,9 +33,6 @@ class App extends StatelessWidget {
         future: streakProvider.initializeStreak(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            print("streakProvider.lastIncrease:${streakProvider.lastIncrease}");
-            print("daysSinceUnix:$daysSinceUnix");
-
             return ScreenUtilInit(
               minTextAdapt: true,
               splitScreenMode: true,
@@ -51,6 +47,12 @@ class App extends StatelessWidget {
                     '/': (context) => const HomeScreen(),
                     '/congratulation': (context) => const CongratulationScreen()
                   },
+                  theme: ThemeData(
+                    popupMenuTheme: const PopupMenuThemeData(
+                      color: Colors.transparent, // Set to transparent
+                      // You can also add other styling properties if needed
+                    ),
+                  ),
                 );
               },
             );

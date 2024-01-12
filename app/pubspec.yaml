@@ -43,6 +43,7 @@ dependencies:
   http: ^0.13.6
   crypto: ^3.0.3
   url_launcher: ^6.1.11
+  flutter_launcher_icons: ^0.13.1
   
   
 
@@ -56,10 +57,20 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-
+  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+flutter_icons:
+  android: true
+  ios: true
+  windows:
+    generate: true
+    image_path: "assets/icon/icon.png"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "assets/icon/icon.png"
+  image_path: "assets/icon/icon.png"
 # The following section is specific to Flutter packages.
 flutter:
 

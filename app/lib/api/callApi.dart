@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:app/providers/ApiKeyProvider.dart';
@@ -16,7 +15,8 @@ import 'PseudoRandomNumber.dart';
 Future<http.Response?> callApi(BuildContext context) async {
   int rating = context.read<CurrentRank>().rank;
   String? apiKey = context.read<ApiKeyProvider>().apiKey;
-  //String? secretKey = context.read<ApiKeyProvider>().ascasfaf;
+  String? secret = context.read<ApiKeyProvider>().secret;
+
   if (apiKey == null) {
     const ApiDialog().showMyDialog(context);
     return null;
@@ -30,7 +30,7 @@ Future<http.Response?> callApi(BuildContext context) async {
     }
 
     String hexPart = sha512Hex(
-        "$rand/problemset.problems?apiKey=$apiKey&time=${DateTime.now().millisecondsSinceEpoch ~/ 1000}#3e54bb7ff326b9eb6854f2d6f3f54688fc3e22d1");
+        "$rand/problemset.problems?apiKey=$apiKey&time=${DateTime.now().millisecondsSinceEpoch ~/ 1000}#$secret");
     Uri ur = Uri(
         scheme: 'https',
         host: 'codeforces.com',
@@ -45,7 +45,9 @@ Future<http.Response?> callApi(BuildContext context) async {
     var problems = jsonData['result']['problems'] as List;
     int maxRating = getRankingRange(rating);
     var filteredProblems = problems.where((p) {
-      return p['rating'] != null && p['rating'] <= maxRating;
+      return p['rating'] != null &&
+          p['rating'] <= maxRating &&
+          p['rating'] >= (rating - 300);
     }).toList();
     int index = getNumber(filteredProblems.length);
     context.read<ProblemProvider>().setData(
@@ -64,7 +66,5 @@ Future<http.Response?> callApi(BuildContext context) async {
 String sha512Hex(String input) {
   var bytes = utf8.encode(input);
   var digest = sha512.convert(bytes);
-  print(digest.toString());
   return digest.toString();
 }
-// TODO remove own apiKey

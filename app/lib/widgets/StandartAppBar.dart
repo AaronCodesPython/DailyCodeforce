@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +13,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
 
-  StandardAppBar({Key? key})
+  const StandardAppBar({Key? key})
       : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
@@ -35,18 +37,27 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
               if (context.read<StreakProvider>().streak == null) {
                 context.read<StreakProvider>().setStreakStd(0);
               }
-              return Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    context.watch<StreakProvider>().streak.toString(),
-                    style: TextStyle(fontSize: 32.sp, color: Colors.white),
-                  ),
-                  Text(
-                    ' Days Streak',
-                    style: TextStyle(fontSize: 18.sp, color: Colors.white),
-                  ),
-                ],
+              return Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                          text:
+                              context.watch<StreakProvider>().streak.toString(),
+                          style:
+                              TextStyle(fontSize: 32.sp, color: Colors.white),
+                          children: [
+                            TextSpan(
+                                text: Platform.isIOS || Platform.isAndroid
+                                    ? ' Days'
+                                    : ' Days Streak',
+                                style: TextStyle(
+                                    fontSize: 18.sp, color: Colors.white))
+                          ]),
+                    ),
+                  ],
+                ),
               );
             } else {
               return const CircularProgressIndicator();
@@ -54,38 +65,8 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
       ),
-      actions: [
+      actions: const [
         RankingWidget(),
-        Container(
-            margin: const EdgeInsets.all(4),
-            decoration: const BoxDecoration(
-                color: UsedColors.containerColor, shape: BoxShape.circle),
-            child: PopupMenuButton(
-              color: UsedColors.containerColor,
-              icon: const Icon(
-                Icons.settings,
-                color: UsedColors.iconColor,
-              ),
-              onSelected: (String res) {},
-              itemBuilder: (context) {
-                return <PopupMenuEntry<String>>[
-                  PopupMenuItem<String>(
-                    value: 'reload',
-                    child: Row(
-                      children: const [
-                        Icon(Icons.repeat),
-                        Text('Reload App'),
-                      ],
-                    ),
-                  ),
-                  const PopupMenuItem<String>(
-                    value: 'time',
-                    child: Text('Time Format Setting'),
-                  ),
-                  // Add more items here
-                ];
-              },
-            )),
       ],
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),
