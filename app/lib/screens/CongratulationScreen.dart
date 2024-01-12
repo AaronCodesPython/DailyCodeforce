@@ -58,12 +58,6 @@ class CongratulationScreen extends StatelessWidget {
           Text('New problem in: ',
               style: TextStyle(color: Colors.white, fontSize: 18.sp)),
           const CountdownTimer(),
-          TextButton(
-              onPressed: () async {
-                final prefs = await SharedPreferences.getInstance();
-                prefs.clear();
-              },
-              child: const Text("dqwfafaf"))
         ]),
       ),
     );
