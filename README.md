@@ -12,27 +12,24 @@ Codeforce Daily is an application designed to help coding enthusiasts and compet
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
 ## Usage
 
 Here's a quick guide on how to use Codeforce Daily:
 
+#### Windows:
+The .exe file is located at app/build/windows/runner/Release/Codeforce Daily.exe
+#### MacOS:
+The file is located under 
 1. Start the application.
-2. Log in with your Codeforces account (if required).
-3. Check the daily problem assigned to you.
-4. Keep track of your streak and progress.
+2. Enter your API key and Secret key (it is only stored locally).
+3. Solve the daily problem assigned to you (every rank has a different daily problem).
+4. Keep track of your streak and progress! :)
 
 ## Built With
 
 - [Flutter](https://flutter.dev/) - The UI framework used.
-- [YourOtherTools](#) - Any other tools or libraries used in the project.
 
 ## Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -44,9 +41,9 @@ Contributions are what make the open-source community such an amazing place to l
 
 - **Aaron Leonard Glaser** - *Initial work* - [AaronCodesPython](https://github.com/AaronCodesPython)
 
-I'm a Computer Science student at ETH Zurich, passionate about coding and competitive programming.
+I'm a Computer Science student at ETH Zurich, passionate about coding and competitive programming :). 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](./app/LICENSE.md) file for details.
 
