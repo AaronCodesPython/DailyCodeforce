@@ -1,0 +1,28 @@
+^C:\USERS\AARON\DESKTOP\DAILYCODEFORCE\APP\BUILD\WINDOWS\CMAKEFILES\43BC42AEEC68EEB94FF7708F6761433D\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Users\aaron\flutterStuff\flutter PROJECT_DIR=C:\Users\aaron\Desktop\DailyCodeforce\app FLUTTER_ROOT=C:\Users\aaron\flutterStuff\flutter FLUTTER_EPHEMERAL_DIR=C:\Users\aaron\Desktop\DailyCodeforce\app\windows\flutter\ephemeral PROJECT_DIR=C:\Users\aaron\Desktop\DailyCodeforce\app FLUTTER_TARGET=lib\main.dart DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=true PACKAGE_CONFIG=C:\Users\aaron\Desktop\DailyCodeforce\app\.dart_tool\package_config.json C:/Users/aaron/flutterStuff/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Release
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\AARON\DESKTOP\DAILYCODEFORCE\APP\BUILD\WINDOWS\CMAKEFILES\9A619E5228E3BD93CD4A0BE7FE1B821F\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\AARON\DESKTOP\DAILYCODEFORCE\APP\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/aaron/Desktop/DailyCodeforce/app/windows -BC:/Users/aaron/Desktop/DailyCodeforce/app/build/windows --check-stamp-file C:/Users/aaron/Desktop/DailyCodeforce/app/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

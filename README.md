@@ -10,14 +10,8 @@ Codeforce Daily is an application designed to help coding enthusiasts and compet
 - **Runs locally**: To ensure that your data is not misused, everything runs and is stored locally, except for an API call to codeforces.com
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-## Usage
-
-Here's a quick guide on how to use Codeforce Daily:
-
 #### Windows:
-The .exe file is located at app/build/windows/runner/Release/Codeforce Daily.exe
+The .exe file is located at executables\windows\runner\Release\CodeforceDaily.exe
 #### MacOS:
 The file is located under 
 1. Start the application.
