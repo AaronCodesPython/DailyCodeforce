@@ -1,6 +1,6 @@
 # Codeforce Daily
 
-Codeforce Daily is an application designed to help coding enthusiasts and competitive programmers stay consistent in their problem-solving practice. Inspired by the daily problem feature of platforms like LeetCode, Codeforce Daily offers a unique problem each day, tailored to the user's rank. This project is especially useful for those preparing for competitive programming contests or looking to enhance their algorithmic skills through regular practice.
+Codeforce Daily is an application designed to help coding enthusiasts and competitive programmers stay consistent in their problem-solving practice. Inspired by the daily problem feature of platforms like LeetCode. The program selects an unique problem each day, based on the users rank. 
 
 ## Features
 
@@ -8,16 +8,21 @@ Codeforce Daily is an application designed to help coding enthusiasts and compet
 - **Streak Tracking**: Keep track of your consistency with a streak feature that logs your daily progress.
 - **Rank-Based Problem Selection**: Problems are selected based on your rank, ensuring that they are appropriately challenging.
 - **Runs locally**: To ensure that your data is not misused, everything runs and is stored locally, except for an API call to codeforces.com
+
 ## Getting Started
 
-#### Windows:
-The .exe file is located at executables\windows\runner\Release\CodeforceDaily.exe
+You can find the release folder under the 'Releases' tap on the Github homepage (https://github.com/AaronCodesPython/DailyCodeforce/releases/). From there just select which platform you want and download it.
+
+### Windows:
+After unzipping the 'Release' folder you download, the .exe can be found under /Release/CodeforceDaily.exe
+
 #### MacOS:
-The file is located under 
-1. Start the application.
-2. Enter your API key and Secret key (it is only stored locally).
-3. Solve the daily problem assigned to you (every rank has a different daily problem).
-4. Keep track of your streak and progress! :)
+
+After downloading the Release.zip, open it and locate the CodeforceDaily Application file, right click the program and then click open, otherwise the os will tell you that it could not scan the program. After doing this the first time, it will be safed as an exception and you can open it normally.
+
+### Android:
+ 
+ Connect your phone with your pc and enable USB-Debugging on your device. After that transfer the .apk file that you can download to your phone. Now you can open it on your phone and install the app.
 
 ## Built With
 
