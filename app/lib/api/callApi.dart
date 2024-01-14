@@ -41,6 +41,7 @@ Future<http.Response?> callApi(BuildContext context) async {
           'apiSig': '$rand$hexPart'
         });
     var resp = await http.get(ur);
+    int code = resp.statusCode;
     var jsonData = jsonDecode(resp.body);
     var problems = jsonData['result']['problems'] as List;
     int maxRating = getRankingRange(rating);
@@ -51,6 +52,7 @@ Future<http.Response?> callApi(BuildContext context) async {
     }).toList();
     int index = getNumber(filteredProblems.length);
     context.read<ProblemProvider>().setData(
+        code,
         filteredProblems[index]['name'],
         filteredProblems[index]['index'],
         filteredProblems[index]['contestId'],

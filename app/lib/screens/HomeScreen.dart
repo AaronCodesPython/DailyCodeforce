@@ -4,6 +4,7 @@ import 'package:app/api/callApi.dart';
 import 'package:app/data/Colors.dart' as UsedColors;
 import 'package:app/providers/ProblemProvider.dart';
 import 'package:app/widgets/AlertDialog_API.dart';
+import 'package:app/widgets/ErrorWidget.dart';
 import 'package:app/widgets/StandartAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,6 +31,8 @@ class HomeScreen extends StatelessWidget {
                   ? height * 0.1
                   : height * 0.2,
             ),
+            context.read<ProblemProvider>().code != 200 ? 
+            const ErrorWidget_api():
             const ProblemWidget(),
             context.read<ApiKeyProvider>().apiKey == null
                 ? const ApiDialog()

@@ -24,9 +24,7 @@ class RankingWidget extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     int startIndex = getIndexByRanking(context.watch<CurrentRank>().rank);
 
-    return FutureBuilder(
-      builder: (context, snapshot) {
-        return PopupMenuButton<String>(
+    return PopupMenuButton<String>(
             child: Container(
               width: screenWidth * 0.3 > 300 ? 300 : screenWidth * 0.3,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -70,7 +68,7 @@ class RankingWidget extends StatelessWidget {
                 );
               }).toList();
             });
-      },
-    );
+      
+    
   }
 }
