@@ -13,7 +13,7 @@ class ProblemWidget extends StatelessWidget {
     bool show = context.watch<ProblemProvider>().contestId != null;
     String url =
         'https://codeforces.com/problemset/problem/${context.watch<ProblemProvider>().contestId}/${context.watch<ProblemProvider>().index}';
-    return Column(
+    return show ? Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         context.watch<ProblemProvider>().title != null
@@ -91,6 +91,6 @@ class ProblemWidget extends StatelessWidget {
                 width: 0,
               )
       ],
-    );
+    ): CircularProgressIndicator();
   }
 }

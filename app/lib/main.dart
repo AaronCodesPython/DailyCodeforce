@@ -62,3 +62,5 @@ class App extends StatelessWidget {
         });
   }
 }
+// TODO: add warning that it may be slow during contests
+// add loading indicator, and a error code if reqeust fails

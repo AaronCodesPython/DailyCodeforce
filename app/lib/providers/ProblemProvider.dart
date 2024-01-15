@@ -6,6 +6,7 @@ class ProblemProvider with ChangeNotifier {
   String? _index;
   int? _contestId;
   int? _rating;
+  bool apiCalled = false;
 
   int? get code => _code;
   String? get title => _title;

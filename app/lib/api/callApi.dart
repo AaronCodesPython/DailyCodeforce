@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 import '../providers/CurrentRankProvider.dart';
 import 'PseudoRandomNumber.dart';
 
-Future<http.Response?> callApi(BuildContext context) async {
+void callApi(BuildContext context) async {
   int rating = context.read<CurrentRank>().rank;
   String? apiKey = context.read<ApiKeyProvider>().apiKey;
   String? secret = context.read<ApiKeyProvider>().secret;
@@ -57,8 +57,7 @@ Future<http.Response?> callApi(BuildContext context) async {
         filteredProblems[index]['index'],
         filteredProblems[index]['contestId'],
         filteredProblems[index]['rating']);
-
-    return resp;
+    
   }
 }
 //https://codeforces.com/apiHelp/methods#problemset.problems
