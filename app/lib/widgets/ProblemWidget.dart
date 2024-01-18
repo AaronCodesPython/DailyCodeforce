@@ -10,12 +10,13 @@ class ProblemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool show = context.watch<ProblemProvider>().contestId != null;
+    bool show = context.watch<ProblemProvider>().code != null;
+    String comment = context.watch<ProblemProvider>().comment!;
     String url =
         'https://codeforces.com/problemset/problem/${context.watch<ProblemProvider>().contestId}/${context.watch<ProblemProvider>().index}';
     return show ? Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: context.watch<ProblemProvider>().code == 200?[
         context.watch<ProblemProvider>().title != null
             ? Text(
                 context.watch<ProblemProvider>().title!,
@@ -83,13 +84,15 @@ class ProblemWidget extends StatelessWidget {
                 },
                 child: Text(
                   'Mark as Done',
-                  style: TextStyle(fontSize: 22.sp),
+                  style: TextStyle(fontSize: 22.sp, color: Colors.white),
                 ),
               )
             : const SizedBox(
                 height: 0,
                 width: 0,
               )
+      ]:[
+        Text(comment, style: TextStyle(color: Colors.white),)
       ],
     ): CircularProgressIndicator();
   }

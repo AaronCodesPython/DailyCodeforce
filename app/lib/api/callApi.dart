@@ -43,7 +43,14 @@ void callApi(BuildContext context) async {
     var resp = await http.get(ur);
     int code = resp.statusCode;
     var jsonData = jsonDecode(resp.body);
-    var problems = jsonData['result']['problems'] as List;
+    var status = jsonData['status'];
+    var comment = jsonData['comment'];
+    
+    if(status == 'FAILED'){
+      context.read<ProblemProvider>().setData(400, null, null, null, null, comment);
+    }
+    else{
+      var problems =jsonData['result']['problems'] as List;
     int maxRating = getRankingRange(rating);
     var filteredProblems = problems.where((p) {
       return p['rating'] != null &&
@@ -55,7 +62,9 @@ void callApi(BuildContext context) async {
         filteredProblems[index]['name'],
         filteredProblems[index]['index'],
         filteredProblems[index]['contestId'],
-        filteredProblems[index]['rating']);
+        filteredProblems[index]['rating'], comment);
+    
+    }
     
   }
 }
