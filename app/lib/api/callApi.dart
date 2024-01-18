@@ -47,8 +47,7 @@ void callApi(BuildContext context) async {
     int maxRating = getRankingRange(rating);
     var filteredProblems = problems.where((p) {
       return p['rating'] != null &&
-          p['rating'] <= maxRating &&
-          p['rating'] >= (rating - 300);
+          p['rating'] <= maxRating;
     }).toList();
     int index = getNumber(filteredProblems.length);
     context.read<ProblemProvider>().setData(

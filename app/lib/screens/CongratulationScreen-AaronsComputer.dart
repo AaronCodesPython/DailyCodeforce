@@ -19,7 +19,7 @@ class CongratulationScreen extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height / 5,
           ),
-          Text('Congratulations, you have finished todays problem...', textAlign: TextAlign. center,
+          Text('Congratulations, you have finished todays problem...',
               style: s),
           FutureBuilder(
               future: context.read<StreakProvider>().initializeStreak(),
@@ -29,18 +29,16 @@ class CongratulationScreen extends StatelessWidget {
                     context.read<StreakProvider>().setStreakStd(0);
                   }
                   return RichText(
-                    textAlign: TextAlign. center,
                     text: TextSpan(
                       text: "You now have a ",
                       style: s,
-                      
                       children: <TextSpan>[
                         TextSpan(
                             text: snapshot.data.toString(),
                             style:
                                 TextStyle(color: Colors.green, fontSize: 32.sp),
                             children: [
-                              TextSpan(text: snapshot.data! > 1 ?' Days Streak!': ' Day Streak!', style: s)
+                              TextSpan(text: ' Days Streak!', style: s)
                             ]),
                       ],
                     ),
