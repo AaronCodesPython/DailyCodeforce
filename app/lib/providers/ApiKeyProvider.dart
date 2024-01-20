@@ -25,4 +25,13 @@ class ApiKeyProvider with ChangeNotifier {
     await prefs.setString('secret', newSecret);
     notifyListeners();
   }
+
+  void deleteKeyData() async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('api');
+    prefs.remove('secret');
+    _apiKey = null;
+    _secret = null;
+    notifyListeners();
+  }
 }

@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: StandardAppBar(),
+      appBar: const StandardAppBar(),
       backgroundColor: UsedColors.backgroundColor,
       body: Center(
         child: Column(
@@ -56,7 +56,13 @@ class HomeScreen extends StatelessWidget {
                       callApi(context);
                     },
                   )
-                : const SizedBox(height: 0, width: 0)
+                : const SizedBox(height: 0, width: 0),
+            
+            context.watch<ProblemProvider>().title == null?
+            SizedBox(height: height*0.1,): const SizedBox(height: 0,width: 0,),
+            context.watch<ProblemProvider>().title == null?
+            Text('Loading a problem might not work, or be slow while a contest is ongoing.', style: TextStyle(color: Colors.white, fontSize: 22.sp),) : const SizedBox(height: 0,width: 0,)
+
           ],
         ),
       ),

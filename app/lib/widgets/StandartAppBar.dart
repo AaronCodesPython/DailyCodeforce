@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/widgets/SettingsWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +54,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
                                     ? ' Days'
                                     : ' Days Streak',
                                 style: TextStyle(
-                                    fontSize: 18.sp, color: Colors.white))
+                                    fontSize: 18.sp > 30 ? 30 : 18.sp, color: Colors.white))
                           ]),
                     ),
                   ],
@@ -65,7 +66,8 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
       ),
-      actions: const [
+      actions:  const [
+        SettingsWidet(),
         RankingWidget(),
       ],
       bottom: PreferredSize(

@@ -11,7 +11,7 @@ class ProblemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool show = context.watch<ProblemProvider>().code != null;
-    String comment = context.watch<ProblemProvider>().comment!;
+    String? comment = context.watch<ProblemProvider>().comment;
     String url =
         'https://codeforces.com/problemset/problem/${context.watch<ProblemProvider>().contestId}/${context.watch<ProblemProvider>().index}';
     return show ? Column(
@@ -92,7 +92,7 @@ class ProblemWidget extends StatelessWidget {
                 width: 0,
               )
       ]:[
-        Text(comment, style: TextStyle(color: Colors.white),)
+        Text(comment??"", style: TextStyle(color: Colors.white),)
       ],
     ): CircularProgressIndicator();
   }

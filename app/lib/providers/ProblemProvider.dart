@@ -16,7 +16,7 @@ class ProblemProvider with ChangeNotifier {
   int? get contestId => _contestId;
   int? get rating => _rating;
 
-  void setData(int newCode, String? newTitle, String? newIndex, int? newId, int? newRating, String newComment) {
+  void setData(int newCode, String? newTitle, String? newIndex, int? newId, int? newRating, String? newComment) {
     _code = newCode;
     _title = newTitle;
     _index = newIndex;
