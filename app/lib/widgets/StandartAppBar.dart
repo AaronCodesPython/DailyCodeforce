@@ -47,14 +47,14 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
                           text:
                               context.watch<StreakProvider>().streak.toString(),
                           style:
-                              TextStyle(fontSize: 32.sp, color: Colors.white),
+                              TextStyle(fontSize: 32.sp > 36?36:32.sp, color: Colors.white),
                           children: [
                             TextSpan(
                                 text: Platform.isIOS || Platform.isAndroid
                                     ? ' Days'
                                     : ' Days Streak',
                                 style: TextStyle(
-                                    fontSize: 18.sp > 30 ? 30 : 18.sp, color: Colors.white))
+                                    fontSize: 18.sp > 26 ? 26 : 18.sp, color: Colors.white))
                           ]),
                     ),
                   ],
